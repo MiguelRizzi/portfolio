@@ -1,0 +1,36 @@
+{% load static %}
+<footer class="text-white border-top px-2 py-5 pb-3">
+  <div class="container-fluid container-fluid ">
+      <div class="row">    
+          <div class="col-12 col-lg-5 order-lg-last mb-4">
+            
+          </div>
+          
+          <div class="col-8 col-sm-4 col-lg-2 p-0 mx-auto mb-4">
+            <img src="" alt="" class="w-100">
+          </div>
+
+          <div class="col-5 col-sm-4 col-lg-2 mb-4">
+              <h5>Navegación</h5>
+              <ul class="nav flex-column">
+              <li class="nav-item mb-2 a-footer"><a href="{% url 'portfolio:index' %}" class="nav-link p-0 text-white">Inicio</a></li>
+              <li class="nav-item mb-2 a-footer"><a href="{% url 'portfolio:project_list' %}" class="nav-link p-0 text-white">Portfolio</a></li>
+              <li class="nav-item mb-2 a-footer"><a href="{% url 'portfolio:contact' %}" class="nav-link p-0 text-white">Contacto</a></li>
+              <li class="nav-item mb-2 a-footer"><a href="{% url 'blog:index' %}" class="nav-link p-0 text-white">Blog</a></li>
+              </ul>
+          </div>
+      
+          <div class="col-7 col-sm-4 col-lg-3 mb-4">
+              <h5>Contacto</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2 a-footer"><a href="https://wa.me/5492494066739" class="nav-link p-0 text-white" rel="nofollow noopener noreferrer"><i class="fab fa-whatsapp"></i> +54 9 2494 066739</a></li>
+                <li class="nav-item mb-2 a-footer"><a href="mailto:miguel.rizzi.dev@gmail.com" class="nav-link p-0 text-white" rel="nofollow noopener noreferrer"><i class="fas fa-envelope"></i> miguel.rizzi.dev@gmail.com</a></li>
+              </ul>
+          </div>
+      </div>
+      
+      <div class="pt-4 border-top">
+        <p class="text-center">&copy; <span id="year"></span> Miguel Rizzi.<br></p>
+      </div>
+  </div>
+</footer>

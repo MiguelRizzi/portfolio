@@ -1,0 +1,23 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">{{ photo.title }}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <img src="{{ photo.image.url }}" class="img-fluid">
+        <p class="p-1">{{ photo.description }}</p>
+
+    </div>
+
+    {% if user.is_authenticated %}
+        
+        <div class="modal-footer">
+                <a hx-get="{% url 'portfolio:photo_update' pk=photo.pk %}" hx-target="#dialog" class="btn btn-success"  >
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a hx-get="{% url 'portfolio:photo_confirm_delete' pk=photo.pk %}" hx-target="#dialog" class="btn btn-danger" >
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<section class="page-section" id="blog">
+    <div class="container px-3 px-lg-5 py-5 pt-5">
+        <nav aria-label="breadcrumb" class="pt-5 mt-5">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'portfolio:index' %}" class="text-dark"><i class="fas fa-home"></i> Inicio</a></li>
+              <li class="breadcrumb-item active"><a href="{% url 'blog:index' %}" class="text-dark">Blog</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
+            </ol>
+        </nav>
+        <div class="row align-items-center">     
+            <div class="col">
+                <div>
+                    <article>
+                        <div class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
+                            <!-- Post meta content-->
+                            {% if post.status == "draft" %}
+                                <p class="text-danger mb-2 fw-bold fs-5">(Borrador)</p>
+                            {% endif %}
+                            <p class="text-muted fst-italic mb-2">{{ post.created_on }} por <span class="fw-semibold">{{ post.user.username }}</span>.</p>
+                            
+                        </div>
+                        <figure class="mb-4"><img class="img-fluid rounded img-post img-post-detail object-fit-contain bg-light" src="{{ post.file.url }}" alt="{{ post.title }}"  style="height: 70vh;"/></figure>
+                        <div class="mb-5">
+                            <p class="fs-5 mb-4">{{ post.body }}</p>
+                            <a hx-get="{% url 'blog:post_update' post.slug %}" hx-target="#dialog" class="btn btn-success"  >
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a hx-get="{% url 'blog:post_confirm_delete' post.slug %}" hx-target="#dialog" class="btn btn-danger" >
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

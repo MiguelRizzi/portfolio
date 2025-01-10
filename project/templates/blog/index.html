@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block header %}
+<div id="header-blog">
+    <div class="container-fluid header-bg">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center py-2">
+            <div class="col-lg-8 align-self-baseline revelar derecha">
+                <hr class="divider mt-3">
+                <h1 class="text-white fs-3">Blog de Fotografía</h1>
+                <form 
+                class="input-group pt-3 pb-5" 
+                hx-get="{% url 'blog:load_post_list' %}?consult={{ consult }}#blog" 
+                hx-target="#results"
+                style="max-width: 500px; margin: 0 auto;"
+                >
+                    <input name="consult" class="form-control" type="text" placeholder="Buscar en el blog..." />
+                    <button class="btn btn-success" id="button-search" type="submit">
+                        <i class="fas fa-search"></i> 
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<section class="page-section" id="blog">
+    <div class="container px-3 px-lg-5 py-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'portfolio:index' %}" class="text-dark"><i class="fas fa-home"></i> Inicio</a></li>
+              <li class="breadcrumb-item active" aria-current="page"> Blog</li>
+            </ol>
+        </nav>
+
+
+        <div class="row">
+            <div id="results" class="col-lg-8" hx-get="{% url 'blog:load_post_list' %}" hx-trigger="load, postListChanged from:body">
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header">Artículos destacados</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="">
+                                <ul class="list-unstyled mb-0">
+                                    {% if featured_posts %}
+                                        {% for post in featured_posts %}
+                                            <li><a href="{% url 'blog:post_detail' post.slug %}" class="text-dark">{{ post.title }}</a></li>
+                                        {% endfor %}
+                                    {% else %} 
+                                        <li>No hay artículos destacados</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if user.is_authenticated %}
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Artículos</div>
+                    <div class="card-body">
+                        <p>Agregar artículos al blog.</p>
+
+                        <button class="btn btn-success w-100" hx-get="{% url 'blog:post_create' %}" hx-target="#dialog">Agregar artículo</button>
+
+                    </div>
+                </div>
+                {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+

@@ -1,0 +1,31 @@
+{% load static %}
+
+{% if object_list %}
+    <div class="col-md-4 p-0">
+        {% for project in object_list %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card revelar">
+                    <a href="{% url 'portfolio:project_detail' project.slug %}">
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    </a>        
+                    <div class="card-body">
+                        <h5 class="card-title   fw-bold">{{ project.title }}</h5>
+                        <p class="card-text fs-5">{{ project.description }}</p>  
+                    </div>
+                </div>        
+            </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        {% include 'components/pagination.html' %}
+    </div>
+{% else %}
+    <div class="col-12 my-5" >
+        <div class="card revelar">
+            <div class="card-body py-4">
+                <p class="card-text fs-5 text-secondary">No hay Resultados{% if consult %} para "{{ consult }}"{% endif %}.</p>
+            </div>
+        </div>
+    </div>
+{% endif %}

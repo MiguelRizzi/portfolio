@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<div id="header-gallery">
+    <div class="container-fluid header-bg">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center py-2">
+            <div class="col-lg-8 align-self-baseline revelar derecha">
+                <hr class="divider mt-3">
+
+                <h1 class="text-white fs-3">Proyectos</h1>
+
+                <form
+                    class="input-group pt-3 pb-5"
+                    hx-get="{% url 'portfolio:load_project_list' %}?consult={{ consult }}"
+                    hx-target="#results"
+                    hx-trigger="submit, load, photoListChanged from:body"
+                    style="max-width: 500px; margin: 0 auto;"
+                >
+                    <input class="form-control" name="consult" type="text" placeholder="Buscar proyectos...">
+                    <button class="btn btn-dark" id="button-search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+    <section class="page-section" id="portfolio">
+        <div class="container px-3 px-lg-5 py-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'portfolio:index' %}" class="text-dark"><i class="fas fa-home"></i> Inicio</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"> Portfolio</li>
+                </ol>
+            </nav>
+            {% if user.is_staff %}
+                <div class="mb-3">
+                    <a hx-get="{% url 'portfolio:photo_create' %}" hx-target="#dialog" class="btn btn-success d-inline-flex align-items-center"><i class="fas fa-plus-circle"></i> Agregar</a>
+                </div>
+            {% endif %}
+
+            <div id="results" class="row" hx-get="{% url 'portfolio:load_project_list' %}" hx-trigger="photoListChanged from:body">
+                {% include 'portfolio/partials/project_list.html' %}
+            </div>
+
+
+            {% url 'portfolio:index' as url %}
+            {% include 'components/index_back.html' with link=url %}
+        </div>
+    </section>
+{% endblock content %}

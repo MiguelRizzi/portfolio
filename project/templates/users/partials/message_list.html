@@ -1,0 +1,40 @@
+{% extends 'components/list.html' %}
+
+{% block table_header %}
+  <tr>
+    <th>Nombre</th>
+    <th class="hide">Email</th>
+    <th class="hide">Fecha</th>
+    <th></th>
+  </tr>
+{% endblock table_header %}
+     
+{% block table_body %}
+    {% if object_list %}
+    {% for message in object_list %}
+    <tr class="{% if not message.is_read %}table-warning{% endif %}">
+      <td>{{ message.name|truncatechars:20 }}</td>
+      <td class="hide">{{ message.email }}</td>
+      <td class="hide">{{ message.date|date:"d/m/Y" }}</td>
+      <td>
+        <button class="btn btn-secondary btn-sm" hx-get="{% url 'users:message_detail' pk=message.pk %}" hx-target="#dialog"><i class="fas fa-eye"></i></button>
+        <button class="btn btn-success btn-sm hide" hx-get="{% url 'users:message_confirm_update' pk=message.pk %}" hx-target="#dialog"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-danger btn-sm hide" hx-get="{% url 'users:message_confirm_delete' pk=message.pk %}" hx-target="#dialog"><i class="fas fa-trash-alt"></i></button>          
+      </td>
+    </tr>
+    {% endfor %}
+
+    {% else %}
+    <tr>
+      <td colspan="5" class="text-center fw-semibold">No se encontraron resultados.</td>
+    </tr>
+    {% endif %}
+{% endblock table_body %}
+
+{% block pagination %}
+  {% include 'components/pagination.html' %}
+{% endblock pagination %}
+
+{% block toast %}
+  {% include 'components/toast.html' %}
+{% endblock toast %}

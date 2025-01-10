@@ -1,0 +1,9 @@
+Sitemap: https://www.....com.ar/sitemap.xml
+User-Agent: *
+Allow: /portfolio/
+Allow: /contacto/
+Allow: /blog/
+Allow: /blog/*/
+Disallow: /mensajes/*/
+Disallow: /resenas/*/
+Disallow: /usuarios/*/

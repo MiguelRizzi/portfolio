@@ -1,0 +1,138 @@
+{% load static %}
+
+<div class="container-fluid" >
+    <div class="div-navbar-brand">
+        <a class="a-navbar-brand d-none" href="{% url 'portfolio:index' %}">
+            <img src="" alt="" class="d-inline-block align-text-top navbar-icon invert-color scale">
+        </a>
+    </div>
+    <button class="navbar-toggler rounded-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon invert-color fs-4 scale">
+            {% if request.total_count %} 
+                <span class="mt-2 position-absolute invert-color top-0 start-100 translate-middle badge rounded-pill bg-danger notification m-1">
+                    {% if request.total_count > 99 %}
+                        99+
+                    {% else %}
+                        {{ request.total_count }}
+                    {% endif %}
+                    <span class="visually-hidden">unread messages</span>
+                </span>
+            {% endif %}
+        </span>
+    </button>
+
+    <div class="offcanvas offcanvas-end offcanvas-bg" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-white fs-3" id="offcanvasNavbarDarkLabel">Menu</h5>
+            <button type="button" class="btn-close invert-color" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <hr class="divider w-100 d-block d-md-none">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item scale">
+                    <a class="nav-link invert-text fw-semibold text-white {% if request.path == '/' %}active-mav{% endif %}" 
+                    {% if request.path == '/' %}
+                        aria-current="page" 
+                    {% endif %}
+                    href="{% url 'portfolio:index' %}">Inicio</i></a>
+                </li>
+                <li class="nav-item scale">
+                    <a class="nav-link invert-text fw-semibold text-white" href="{% url 'portfolio:project_list' %}">Portfolio</i></a>
+                </li>
+                <li class="nav-item scale">
+                    <a class="nav-link invert-text fw-semibold text-white" href="{% url 'portfolio:contact' %}">Contacto</i></a>
+                </li>
+                <li class="nav-item scale">
+                    <a class="nav-link invert-text fw-semibold text-white {% if request.path == '/blog/' %}active-nav{% endif %}" 
+                    {% if request.path == '/blog/' %}
+                        aria-current="page" 
+                    {% endif %}
+                    href="{% url 'blog:index' %}">Blog</i></a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <li class="nav-item fw-semibold dropdown order-first order-md-last pt-3 pt-md-0">
+                    <a class="nav-link dropdown-toggle username fw-semibold scale" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.username }}
+                        <span class="position-relative">
+                            {% if user.avatar.image %}
+                                <img src="{{ user.avatar.image.url }}" class="icon-avatar" alt="Avatar" >
+                            {% else %}
+                                <img src="{% static 'img/avatar-default.png' %}" class="icon-avatar" alt="Avatar">
+                            {% endif %}
+                            
+                            {% if request.total_count %} 
+                                <span class="mt-2 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification">
+                                    {% if request.total_count > 99 %}
+                                        99+
+                                    {% else %}
+                                        {{ request.total_count }}
+                                    {% endif %}
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            {% endif %}
+                
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end text-center text-md-start" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'users:message_list' %}">
+                            Mensajes
+                            {% if request.unread_messages_count > 0 %}           
+                                <span class="badge rounded-pill bg-danger notification">
+                                    {{ request.unread_messages_count }}
+                                    <span class="visually-hidden">Mensajes no leidos</span>
+                                </span>
+                            {% endif %}
+                        </a></li>
+                        <li><a class="dropdown-item" href="{% url 'users:review_list' %}">
+                            Reseñas
+                            {% if request.unapproved_reviews_count %}
+                                <span class="badge rounded-pill bg-danger notification">
+                                    {{ request.unapproved_reviews_count }}
+                                    <span class="visually-hidden">Mensajes no leidos</span>
+                                </span>
+                            {% endif %}
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        {% if not user.avatar %}
+                        <li><a class="dropdown-item" hx-get="{% url 'users:avatar_create' %}" hx-target="#dialog">Mi avatar</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" hx-get="{% url 'users:avatar_detail' pk=user.avatar.pk %}" hx-target="#dialog">Mi avatar</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" hx-get="{% url 'users:change_password' %}" hx-target="#dialog">Cambiar contraseña</a></li>
+                        <li>
+                            <form action="{% url 'users:logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal">Cerrar sesión</button>      
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
+        
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navbar = document.querySelector('.navbar');
+    const aNavbarBrand = document.querySelector('.a-navbar-brand');
+    const currentPath = window.location.pathname;
+
+    navLinks.forEach(link => {
+    const linkPath = link.getAttribute('href');
+    if (currentPath === linkPath) {
+        link.classList.add('active-nav');
+    } else {
+        link.classList.remove('active-nav');
+    }
+    });
+    if (currentPath !== '/' && currentPath !== '/blog/' && currentPath !== '/portfolio/') {
+    navbar.style.backgroundColor = '#1a1a1a';
+    navbar.style.backgroundImage = 'none';
+    aNavbarBrand.classList.remove('d-none');
+    }
+</script>

@@ -1,0 +1,40 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            {% if '/confirmar/eliminar/' in request.path %}
+            Eliminar reseña
+            {% else %}
+            Actualizar reseña
+            {% endif %}
+            </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+
+        {% if '/confirmar/eliminar/' in request.path %}
+            <p>¿Confirmas eliminar la reseña de {{review.name}}?</p>
+            <p class="text-muted">Esta acción no se puede deshacer.</p>
+        {% else %}
+            {% if review.is_approved %}
+                <p>¿Confirmas marcar como <span class="text-danger fw-semibold">NO APROBADO</span> la reseña de {{review.name}}?</p>
+            {% else %}
+                <p>¿Confirmas marcar como <span class="text-success fw-semibold">APROBADO</span> la reseña de {{review.name}}?</p>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        Cancelar
+        </button>
+        {% if '/confirmar/eliminar/' in request.path %}
+            <button type="submit" class="btn btn-danger" hx-delete = "{% url 'users:review_delete' pk=review.pk %}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' >Eliminar</button>
+
+        {% else %}
+            {% if review.is_approved %}
+                <button type="submit" class="btn btn-danger" hx-patch = "{% url 'users:review_update' pk=review.pk %}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' >Actualizar</button>
+            {% else %}
+                <button type="submit" class="btn btn-success" hx-patch = "{% url 'users:review_update' pk=review.pk %}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' >Actualizar</button>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

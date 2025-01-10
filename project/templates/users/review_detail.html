@@ -1,0 +1,27 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Reseña</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Nombre:</strong> {{ review.name }}</li>
+            <li class="list-group-item"><strong>Fecha:</strong> {{ review.email }}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{ review.date }}</li>
+            {% if review.is_approved %}
+                <li class="list-group-item"><strong>Aprobado:</strong> <i class="fa fa-check text-success"></i></li>
+            {% else %}
+                <li class="list-group-item"><strong>Aprobado:</strong> <i class="fa fa-times text-danger"></i></li>
+            {% endif %}
+            <li class="list-group-item"><strong>Reseña:</strong> {{ review.content }}</li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <a hx-get="{% url 'users:review_confirm_update' pk=review.pk %}" hx-target="#dialog" class="btn btn-success"  >
+            <i class="fas fa-edit"></i>
+        </a>
+        <a hx-get="{% url 'users:review_confirm_delete' pk=review.pk %}" hx-target="#dialog" class="btn btn-danger" >
+            <i class="fas fa-trash-alt"></i>
+        </a>
+    </div>
+</div>

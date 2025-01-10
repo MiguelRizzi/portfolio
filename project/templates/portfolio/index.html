@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<div id="header-index">
+    <div class="container-fluid header-bg">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center py-2">
+            <div class="col-lg-8 align-self-baseline mb-5 revelar derecha">
+                <hr class="divider mt-3">
+                <h1 class="text-white fs-3 ">Desarrollo Web</h1>
+                <h2 class="text-white fs-5 fw-normal mb-4 h2-index">Miguel Rizzi</h2>
+                
+                <a href="https://wa.me/5492494066739" class="btn btn-dark rounded-0 btn-lg px-4 me-sm-3" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-whatsapp"></i> Contacto</a>
+                <a href="{% url 'portfolio:project_list' %}" class="btn btn-outline-light rounded-0 btn-lg px-4">Trabajos</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Eliminar articulo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <p>¿Confirmas eliminar el articuo "{{post.name}}"?</p>
+        <p class="text-muted">Esta acción no se puede deshacer.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-danger" hx-post = "{% url 'blog:post_delete' post.slug %}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' >Eliminar</button>
+    </div>
+</div>
