@@ -79,7 +79,7 @@ textarea{
 }
 /* Header */
 #header-index{
-    background-image: url(../img/header.jpg);
+    background-image: url(../img/fondo.png);
     background-size: cover;
     background-position: center;
 }
@@ -89,7 +89,7 @@ textarea{
     width: 100%;
 }
 #header-blog, #header-contact, #header-gallery{
-    background-image: url(../img/header.jpg);
+    background-image: url(../img/fondo.webp);
     background-size: cover;
     background-position: center;
 }
@@ -200,3 +200,7 @@ footer, .offcanvas-bg{
         display: none;
     }
 }   
+
+.color-h1{
+    color:#c0ebff!important
+}

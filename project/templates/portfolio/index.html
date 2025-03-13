@@ -4,21 +4,59 @@
 {% block header %}
 <div id="header-index">
     <div class="container-fluid header-bg">
-        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center py-2">
-            <div class="col-lg-8 align-self-baseline mb-5 revelar derecha">
-                <hr class="divider mt-3">
-                <h1 class="text-white fs-3 ">Desarrollo Web</h1>
-                <h2 class="text-white fs-5 fw-normal mb-4 h2-index">Miguel Rizzi</h2>
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-md-start justify-content-center text-center text-md-start py-5">
+            <div class="col-lg-8 align-self-baseline mb-5 revelar derecha m-5 p-5 ">
+                <h1 class="text-white display-3 fw-bold color-h1">Full Stack Developer</h1>
+                <h2 class="text-white fs-2 fw-normal mb-4 h2-index">Desarrollo web a medida</h2>
                 
                 <a href="https://wa.me/5492494066739" class="btn btn-dark rounded-0 btn-lg px-4 me-sm-3" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-whatsapp"></i> Contacto</a>
-                <a href="{% url 'portfolio:project_list' %}" class="btn btn-outline-light rounded-0 btn-lg px-4">Trabajos</a>
+                <a href="{% url 'portfolio:project_list' %}" class="btn btn-outline-light rounded-0 btn-lg px-4">portfolio</a>
             </div>
         </div>
     </div>
 </div>
 {% endblock header %}
 
-{% block content %}
 
+
+{% block content %}
+<section class="page-section" id="">
+    <div class="container px-3 px-lg-5 py-5">
+        
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bolder text-uppercase mb-4">Sobre mi</h2>   
+                <p class="lead fw-normal text-muted mb-4">
+                    Soy un desarrollador Full Stack con experiencia en el desarrollo de aplicaciones web.
+                    Me especializo en el desarrollo de aplicaciones web con Python y Django.
+                </p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bolder text-uppercase mb-4">Skills</h2>   
+                <img class="img-fluid" src="{% static 'img/python-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/django-plain.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/djangorest-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/fastapi-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/javascript-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/react-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/html5-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/css3-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/sass-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/bootstrap-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/tailwindcss-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/git-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/mysql-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/postgresql-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/figma-original.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/illustrator-plain.svg' %}" alt="Skills" width="60">
+                <img class="img-fluid" src="{% static 'img/photoshop-original.svg' %}" alt="Skills" width="60">
+              
+            </div>
+        </div>
+      
+    </div>
+</section>
 
 {% endblock %}

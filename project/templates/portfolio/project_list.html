@@ -40,7 +40,7 @@
             </nav>
             {% if user.is_staff %}
                 <div class="mb-3">
-                    <a hx-get="{% url 'portfolio:photo_create' %}" hx-target="#dialog" class="btn btn-success d-inline-flex align-items-center"><i class="fas fa-plus-circle"></i> Agregar</a>
+                    <a hx-get="{% url 'portfolio:project_create' %}" hx-target="#dialog" class="btn btn-success d-inline-flex align-items-center"><i class="fas fa-plus-circle"></i> Agregar</a>
                 </div>
             {% endif %}
 
