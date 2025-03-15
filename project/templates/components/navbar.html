@@ -1,10 +1,11 @@
 {% load static %}
 
-<div class="container-fluid" >
-    <div class="div-navbar-brand">
-        <a class="a-navbar-brand d-none" href="{% url 'portfolio:index' %}">
-            <img src="{% static 'img/icon-navbar.png' %}" alt="" class="d-inline-block align-text-top navbar-icon invert-color scale" height="50">
+<div class="container-fluid px-5 mx-5" >
+    <div class="div-navbar-brand h-100 scale">
+        <a class="a-navbar-brand d-none text-white fw-bolder text-decoration-none" href="{% url 'portfolio:index' %}">
+            Miguel <span class="color-name">Rizzi</span>
         </a>
+
     </div>
     <button class="navbar-toggler rounded-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon invert-color fs-4 scale">
@@ -135,4 +136,5 @@
     navbar.style.backgroundImage = 'none';
     aNavbarBrand.classList.remove('d-none');
     }
+
 </script>
